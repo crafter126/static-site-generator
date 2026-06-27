@@ -1,5 +1,5 @@
 import unittest
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 
 class TestHTMLNode(unittest.TestCase):
@@ -37,6 +37,22 @@ class TestHTMLNode(unittest.TestCase):
             html_node.__repr__(),
             "HTMLNode(div, This text should go inside a div element, None, {'class': 'primary'})",
         )
+
+    def test_leaf_to_html_p(self):
+        node = LeafNode("p", "Hello, world!")
+        self.assertEqual(node.to_html(), "<p>Hello, world!</p>")
+
+    def test_leaf_to_html_span(self):
+        node = LeafNode("span", "Hello, world!")
+        self.assertEqual(node.to_html(), "<span>Hello, world!</span>")
+
+    def test_leaf_to_html_div(self):
+        node = LeafNode("div", "Hello, world!", {"class": "main-div"})
+        self.assertEqual(node.to_html(), '<div class="main-div">Hello, world!</div>')
+
+    def test_leaf_to_html_no_tag(self):
+        node = LeafNode(None, "Hello, world!")
+        self.assertEqual(node.to_html(), "Hello, world!")
 
 
 if __name__ == "__main__":
