@@ -41,16 +41,16 @@ class TestTextNodeToHTMLNode(unittest.TestCase):
     def test_text(self):
         node = TextNode("This is a text node", TextType.TEXT)
         html_node = text_node_to_html_node(node)
-        self.assertEqual(html_node.tag, None)
-        self.assertEqual(html_node.value, "This is a text node")
+        self.assertEqual(None, html_node.tag)
+        self.assertEqual("This is a text node", html_node.value)
 
     def test_link(self):
         node = TextNode(
             "This link goes to google.com", TextType.LINK, "https://www.google.com"
         )
         html_node = text_node_to_html_node(node)
-        self.assertEqual(html_node.tag, "a")
-        self.assertEqual(html_node.value, "This link goes to google.com")
+        self.assertEqual("a", html_node.tag)
+        self.assertEqual("This link goes to google.com", html_node.value)
 
     def test_img(self):
         node = TextNode(
@@ -59,13 +59,13 @@ class TestTextNodeToHTMLNode(unittest.TestCase):
             "https://www.google.com/some-image",
         )
         html_node = text_node_to_html_node(node)
-        self.assertEqual(html_node.tag, "img")
+        self.assertEqual("img", html_node.tag)
         self.assertEqual(
-            html_node.props,
             {
                 "src": "https://www.google.com/some-image",
                 "alt": "This is a sample image",
             },
+            html_node.props,
         )
 
 

@@ -8,12 +8,12 @@ class TestInlineMarkdown(unittest.TestCase):
         node = TextNode("This text contain **bolded** word", TextType.TEXT)
         new_nodes = split_nodes_delimiter([node], "**", TextType.BOLD)
         self.assertEqual(
-            new_nodes,
             [
                 TextNode("This text contain ", TextType.TEXT),
                 TextNode("bolded", TextType.BOLD),
                 TextNode(" word", TextType.TEXT),
             ],
+            new_nodes,
         )
 
     def test_delim_bold_double(self):
@@ -23,7 +23,6 @@ class TestInlineMarkdown(unittest.TestCase):
         )
         new_nodes = split_nodes_delimiter([node], "**", TextType.BOLD)
         self.assertEqual(
-            new_nodes,
             [
                 TextNode("This text contains two ", TextType.TEXT),
                 TextNode("bolded", TextType.BOLD),
@@ -31,18 +30,19 @@ class TestInlineMarkdown(unittest.TestCase):
                 TextNode("another bolded", TextType.BOLD),
                 TextNode(" words", TextType.TEXT),
             ],
+            new_nodes,
         )
 
     def test_delim_italic(self):
         node = TextNode("This text contains an __italic__ word.", TextType.TEXT)
         new_nodes = split_nodes_delimiter([node], "__", TextType.ITALIC)
         self.assertEqual(
-            new_nodes,
             [
                 TextNode("This text contains an ", TextType.TEXT),
                 TextNode("italic", TextType.ITALIC),
                 TextNode(" word.", TextType.TEXT),
             ],
+            new_nodes,
         )
 
     def test_delim_bold_and_italic(self):
@@ -52,7 +52,6 @@ class TestInlineMarkdown(unittest.TestCase):
         new_nodes = split_nodes_delimiter([node], "**", TextType.BOLD)
         new_nodes = split_nodes_delimiter(new_nodes, "__", TextType.ITALIC)
         self.assertEqual(
-            new_nodes,
             [
                 TextNode("This text contains ", TextType.TEXT),
                 TextNode("bold", TextType.BOLD),
@@ -60,6 +59,7 @@ class TestInlineMarkdown(unittest.TestCase):
                 TextNode("italic", TextType.ITALIC),
                 TextNode(" texts.", TextType.TEXT),
             ],
+            new_nodes,
         )
 
     def test_delim_code(self):
